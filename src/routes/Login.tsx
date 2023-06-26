@@ -5,6 +5,8 @@ import LoginForm from '../components/LoginForm';
 import { LoginValue } from '../types/types';
 import { sleep } from '../utils/utils';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { globalLoadingAtom } from '../states/atom';
 
 const LoginBox = styled('div')({
   padding: '16px',
@@ -19,6 +21,7 @@ const LoginTitle = styled('h1')({
 
 const Login: FC = () => {
   const navigate = useNavigate();
+  const isGlobalLoading = useRecoilValue(globalLoadingAtom);
 
   const onSubmit = async (value: LoginValue) => {
     console.log(value);
@@ -29,10 +32,12 @@ const Login: FC = () => {
 
   return (
     <PageContainer>
-      <LoginBox>
-        <LoginTitle>Login</LoginTitle>
-        <LoginForm onSubmit={onSubmit} />
-      </LoginBox>
+      {!isGlobalLoading && (
+        <LoginBox>
+          <LoginTitle>Login</LoginTitle>
+          <LoginForm onSubmit={onSubmit} />
+        </LoginBox>
+      )}
     </PageContainer>
   );
 };
