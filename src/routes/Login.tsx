@@ -3,6 +3,8 @@ import { FC } from 'react';
 import PageContainer from '../components/PageContainer';
 import LoginForm from '../components/LoginForm';
 import { LoginValue } from '../types/types';
+import { sleep } from '../utils/utils';
+import { useNavigate } from 'react-router-dom';
 
 const LoginBox = styled('div')({
   padding: '16px',
@@ -16,8 +18,13 @@ const LoginTitle = styled('h1')({
 });
 
 const Login: FC = () => {
+  const navigate = useNavigate();
+
   const onSubmit = async (value: LoginValue) => {
     console.log(value);
+    await sleep(300); // 模擬登入API
+    localStorage.setItem('user', value.email);
+    navigate('/list');
   };
 
   return (
