@@ -1,13 +1,15 @@
-import { FC } from "react";
-import { Outlet } from "react-router";
+import { Container } from '@mui/material';
+import { FC } from 'react';
+import { Outlet } from 'react-router';
 
-
-const Root:FC = () => {
-    return (
-    <div>
+const Root: FC = () => {
+  return (
+    <Container component="main" maxWidth="sm">
+      <div style={{ height: '100vh' }}>
         <Outlet />
-    </div>
-    )
-} 
+      </div>
+    </Container>
+  );
+};
 
 export default Root;
